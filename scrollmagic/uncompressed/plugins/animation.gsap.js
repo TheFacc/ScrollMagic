@@ -25,6 +25,10 @@
  * @requires {@link http://greensock.com/gsap|GSAP ~1.14.x}
  * @mixin animation.GSAP
  */
+// https://github.com/janpaepke/ScrollMagic/issues/665#issuecomment-558239420
+import { TimelineMax, TweenMax, TweenLite} from "gsap/all";
+import ScrollMagic from "scrollmagic";
+
 (function (root, factory) {
 	if (typeof define === 'function' && define.amd) {
 		// AMD. Register as an anonymous module.
@@ -38,7 +42,7 @@
 		factory(require('scrollmagic'), gsap, TweenMax || gsap, TimelineMax || gsap);
 	} else {
 		// Browser globals
-		factory(root.ScrollMagic || (root.jQuery && root.jQuery.ScrollMagic), root.gsap, root.gsap || root.TweenMax || root.TweenLite, root.gsap || root.TimelineMax || root.TimelineLite);
+		factory(ScrollMagic || (jQuery && jQuery.ScrollMagic), gsap, gsap || TweenMax || TweenLite, gsap || TimelineMax || TimelineLite);
 	}
 }(this, function (ScrollMagic, Gsap, Tween, Timeline) {
 	"use strict";
